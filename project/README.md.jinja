@@ -42,7 +42,16 @@ Install this via pip (or your favourite package manager):
 
 ## Start developing
 
-The project uses Poetry for dependencies management and packaging. Make sure you have it installed in your development machine. To install the development dependencies in a virtual environment, type:
+The project uses Poetry for dependencies management and packaging. 
+If you do not have Poetry installed, you can run the `boostrap.ps1` script.
+This will install Python and Poetry as configured in `scoopfile.json`.
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser -Force
+.\bootstrap.ps1
+```
+
+To install the development dependencies in a virtual environment, type:
 
 ```shell
 poetry install
