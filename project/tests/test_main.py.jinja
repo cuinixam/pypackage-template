@@ -1,5 +1,5 @@
-from {{ package_name }}.main import add
+from {{ package_name }}.main import MyClass
 
 
 def test_add():
-    assert add(1, 1) == 2
+    assert MyClass(2).add(1) == 3
