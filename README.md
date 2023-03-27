@@ -23,7 +23,13 @@ Project template for a Python Package using Copier.
 
 ## Usage
 
-Generate a new project with:
+If you cloned the repository, run:
+
+```shell
+copier . path-to-project
+```
+
+otherwise, you can use the template directly:
 
 ```shell
 copier "gh:browniebroke/pypackage-template" path-to-project
