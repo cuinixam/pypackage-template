@@ -71,11 +71,6 @@ setup_pre_commit:
   help: "Setup pre-commit hooks (requires pre-commit)?"
   default: no
 
-add_me_as_contributor:
-  type: bool
-  help: "Add me as a contributor?"
-  default: no
-
 # Copier metadata
 _min_copier_version: "7.0.0"
 _subdirectory: "project"
@@ -97,5 +92,3 @@ _tasks:
   - "{% if setup_github %}gh secret set GH_PAT -b'changeme'{% endif %}"
   # Setup pre-commit
   - "{% if setup_pre_commit %}pre-commit install{% endif %}"
-  # Add me as a contributor
-  - "{% if add_me_as_contributor %}npx all-contributors-cli add {{ github_username }} code,ideas,doc{% endif %}"

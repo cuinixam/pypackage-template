@@ -24,7 +24,6 @@ def base_answers():
         "initial_commit": False,
         "setup_github": False,
         "setup_pre_commit": False,
-        "add_me_as_contributor": False,
     }
 
 

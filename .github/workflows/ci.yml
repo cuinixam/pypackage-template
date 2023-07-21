@@ -17,9 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         python-version:
-          - "3.7"
-          - "3.8"
-          - "3.9"
           - "3.10"
           - "3.11"
         os:
@@ -63,7 +60,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.9"
+          python-version: "10"
       - uses: snok/install-poetry@v1
       - run: poetry install
       - run: poetry run copier . my-project --data 'full_name=Bruno Alla' --data 'email=test@example.com' --data 'github_username=dummy' --data 'project_name=My Amazing Project' --data 'project_short_description=Just a great project' --defaults
