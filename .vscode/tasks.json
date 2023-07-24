@@ -2,8 +2,56 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "install dev dependencies",
-      "command": "poetry install --with=dev",
+      "label": "install dependencies",
+      "command": ".venv/bin/poetry install --with=dev",
+      "windows": {
+        "command": ".venv/Scripts/poetry install --with=dev"
+      },
+      "type": "shell",
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "run tests",
+      "command": ".venv/bin/poetry run pytest --cov",
+      "windows": {
+        "command": ".venv/Scripts/poetry run pytest --cov"
+      },
+      "type": "shell",
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "run tests in file",
+      "type": "shell",
+      "command": ".venv/bin/poetry run pytest --cov ${file}",
+      "windows": {
+        "command": ".venv/Scripts/poetry run pytest --cov ${file}"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "run pre-commit checks",
+      "command": ".venv/bin/poetry run pre-commit run --all-files",
+      "windows": {
+        "command": ".venv/Scripts/poetry run pre-commit run --all-files"
+      },
       "type": "shell",
       "presentation": {
         "reveal": "always"
@@ -15,7 +63,10 @@
     },
     {
       "label": "bootstrap",
-      "command": "${workspaceFolder}/bootstrap.ps1",
+      "command": "${workspaceFolder}/bootstrap.py",
+      "windows": {
+        "command": "${workspaceFolder}/bootstrap.ps1"
+      },
       "type": "shell",
       "presentation": {
         "reveal": "always"
@@ -24,25 +75,6 @@
         "kind": "build",
         "isDefault": false
       }
-    },
-    {
-      "label": "generate new project",
-      "command": "poetry run copier . ${input:new_project_name}",
-      "type": "shell",
-      "presentation": {
-        "reveal": "always"
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      }
-    }
-  ],
-  "inputs": [
-    {
-      "id": "new_project_name",
-      "type": "promptString",
-      "description": "Enter the name of the new project"
     }
   ]
 }
