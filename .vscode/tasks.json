@@ -75,6 +75,28 @@
         "kind": "build",
         "isDefault": false
       }
+    },
+    {
+      "label": "generate new project",
+      "command": ".venv/bin/poetry run copier copy --trust . ${input:new_project_name}",
+      "windows": {
+        "command": ".venv/Scripts/poetry run copier copy --trust . ${input:new_project_name}",
+      },
+      "type": "shell",
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "new_project_name",
+      "type": "promptString",
+      "description": "Enter the name of the new project"
     }
   ]
 }
