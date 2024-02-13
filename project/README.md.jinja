@@ -43,31 +43,26 @@ Install this via pip (or your favourite package manager):
 ## Start developing
 
 The project uses Poetry for dependencies management and packaging.
-If you do not have Poetry installed, you can run the `boostrap.ps1` script.
-This will install Python and Poetry as configured in `scoopfile.json`.
+Run the `bootstrap.ps1` script to install Python and create the virtual environment.
 
 ```powershell
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser -Force
 .\bootstrap.ps1
 ```
 
-To install the development dependencies in a virtual environment, type:
+This will also generate a `poetry.lock` file, you should track this file in version control.
+
+To execute the test suite, call pytest inside Poetry's virtual environment via `poetry run`:
 
 ```shell
-poetry install
-```
-
-This will also generate a `poetry.lock` file, you should track this file in version control. To execute the test suite, call pytest inside Poetry's virtual environment via `poetry run`:
-
-```shell
-poetry run pytest
+.venv/Scripts/poetry run pytest
 ```
 
 Check out the Poetry documentation for more information on the available commands.
 
 For those using [VS Code](https://code.visualstudio.com/) there are tasks defined for the most common commands:
 
-- install development dependencies
+- bootstrap
+- install dependencies
 - run tests
 - run all checks configured for pre-commit
 - generate documentation
