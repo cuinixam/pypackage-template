@@ -32,23 +32,28 @@ pytest = "^7.0"
 pytest-cov = "^4.0"
 black = "^23.1.0"
 pre-commit = "^3.1.1"
+ruff = "^0.3.0"
 {%- if documentation %}
 
 [tool.poetry.group.docs]
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-myst-parser = ">=0.16"
-sphinx = ">=4.0"
+myst-parser = { version = ">=0.16", python = ">=3.11"}
+sphinx = { version = ">=4.0", python = ">=3.11"}
 sphinx-rtd-theme = ">=1.0"
 m2r = "^0.3.1"
 sphinxcontrib-mermaid = "^0.8.1"
 {%- endif %}
 
 [tool.semantic_release]
-branch = "main"
-version_toml = "pyproject.toml:tool.poetry.version"
-version_variable = "src/{{ package_name }}/__init__.py:__version__"
+version_toml = ["pyproject.toml:tool.poetry.version"]
+version_variables = [
+    "src/{{ package_name }}/__init__.py:__version__",
+    {%- if documentation %}
+    "docs/conf.py:release",
+    {%- endif %}
+]
 build_command = "pip install poetry && poetry build"
 
 [tool.semantic_release.changelog]
@@ -59,6 +64,13 @@ exclude_commit_patterns = [
 
 [tool.semantic_release.changelog.environment]
 keep_trailing_newline = true
+
+[tool.semantic_release.branches.main]
+match = "main"
+
+[tool.semantic_release.branches.noop]
+match = "(?!main$)"
+prerelease = true
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault --cov={{ package_name }} --cov-report=term-missing:skip-covered"
@@ -76,9 +88,50 @@ exclude_lines = [
     'if __name__ == "__main__":',
 ]
 
-[tool.isort]
-profile = "black"
-known_first_party = ["{{ package_name }}", "tests"]
+[tool.ruff]
+target-version = "py38"
+line-length = 120
+lint.ignore = [
+    "D203", # 1 blank line required before class docstring
+    "D212", # Multi-line docstring summary should start at the first line
+    "D100", # Missing docstring in public module
+    "D104", # Missing docstring in public package
+    "D107", # Missing docstring in `__init__`
+    "D401", # First line of docstring should be in imperative mood
+]
+lint.select = [
+    "B",   # flake8-bugbear
+    "D",   # flake8-docstrings
+    "C4",  # flake8-comprehensions
+    "S",   # flake8-bandit
+    "F",   # pyflake
+    "E",   # pycodestyle
+    "W",   # pycodestyle
+    "UP",  # pyupgrade
+    "I",   # isort
+    "RUF", # ruff specific
+]
+exclude = [
+    "bootstrap.py"
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = [
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "S101",
+]
+"setup.py" = ["D100"]
+"conftest.py" = ["D100"]
+{%- if documentation %}
+"docs/conf.py" = ["D100"]
+{%- endif %}
+
+[tool.ruff.lint.isort]
+known-first-party = ["{{ package_name }}", "tests"]
 
 [tool.mypy]
 check_untyped_defs = true
