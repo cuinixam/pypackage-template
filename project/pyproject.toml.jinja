@@ -26,6 +26,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+py-app-dev = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"
@@ -44,6 +45,11 @@ sphinx = { version = ">=4.0", python = ">=3.11"}
 sphinx-rtd-theme = ">=1.0"
 m2r = "^0.3.1"
 sphinxcontrib-mermaid = "^0.8.1"
+sphinxcontrib-bibtex = "^2.6.1"
+mlx-traceability = "^10.0.0"
+sphinx-rtd-size = "^0.2.0"
+sphinx-copybutton = "^0.5.2"
+sphinx-new-tab-link = "^0.2.2"
 {%- endif %}
 
 [tool.semantic_release]
@@ -54,7 +60,7 @@ version_variables = [
     "docs/conf.py:release",
     {%- endif %}
 ]
-build_command = "pip install poetry && poetry build"
+build_command = ".venv/Scripts/poetry build"
 
 [tool.semantic_release.changelog]
 exclude_commit_patterns = [
@@ -95,6 +101,9 @@ lint.ignore = [
     "D203", # 1 blank line required before class docstring
     "D212", # Multi-line docstring summary should start at the first line
     "D100", # Missing docstring in public module
+    "D101", # Missing docstring in public class
+    "D102", # Missing docstring in public method
+    "D103", # Missing docstring in public function
     "D104", # Missing docstring in public package
     "D107", # Missing docstring in `__init__`
     "D401", # First line of docstring should be in imperative mood
