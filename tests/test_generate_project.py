@@ -20,10 +20,6 @@ def base_answers():
         "version": "0.0.1",
         "open_source_license": "MIT",
         "documentation": True,
-        "run_poetry_install": False,
-        "initial_commit": False,
-        "setup_github": False,
-        "setup_pre_commit": False,
     }
 
 
