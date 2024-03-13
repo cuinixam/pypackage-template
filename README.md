@@ -23,19 +23,26 @@ Project template for a Python Package using Copier.
 
 ## Usage
 
-If you cloned the repository, run:
+After you cloned the repository, run the `bootstrap.ps1` script to create the virtual environment.
 
-```shell
-copier . path-to-project
+```powershell
+.\bootstrap.ps1
 ```
 
-otherwise, you can use the template directly:
+If you are not using Windows run the bootstrap Python script:
 
 ```shell
-copier "gh:browniebroke/pypackage-template" path-to-project
+.\bootstrap.py
 ```
 
+Next, run `generate_new_pypackage.ps1` to generate a new Python Package:
+
+```powershell
+.\generate_new_pypackage.ps1 -repositoryName HelloPython -outputPath C:\temp
+```
 This will prompt you for a few questions and create new directory with the name you used as project slug.
+
+Have fun!
 
 ### Start developing
 
@@ -70,7 +77,6 @@ A `labels` workflow will also run and synchronise the GitHub labels based on the
 
 The workflows need [a few secrets][gh-secrets] to be setup in your GitHub repository:
 
-- `PYPI_TOKEN` to publish releases to [PyPI][pypi]. This one should be created as `release` environment secret.
 - `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` workflow.
 - `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
 
