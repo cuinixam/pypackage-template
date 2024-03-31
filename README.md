@@ -40,6 +40,7 @@ Next, run `generate_new_pypackage.ps1` to generate a new Python Package:
 ```powershell
 .\generate_new_pypackage.ps1 -repositoryName HelloPython -outputPath C:\temp
 ```
+
 This will prompt you for a few questions and create new directory with the name you used as project slug.
 
 Have fun!

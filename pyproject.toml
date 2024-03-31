@@ -12,13 +12,56 @@ python = "^3.10"
 copier = "^9.0.0"
 pytest = "^8.0.0"
 pytest-cov = "^4.0"
-black = "^23.1.0"
 pre-commit = "^3.1.1"
 pytest-mock = "^3.3"
+ruff = "^0.3.4"
 
-[tool.isort]
-profile = "black"
-known_first_party = ["{{package_name}}", "hooks", "tests"]
+[tool.ruff]
+target-version = "py38"
+line-length = 180
+lint.ignore = [
+    "D203", # 1 blank line required before class docstring
+    "D212", # Multi-line docstring summary should start at the first line
+    "D100", # Missing docstring in public module
+    "D101", # Missing docstring in public class
+    "D102", # Missing docstring in public method
+    "D103", # Missing docstring in public function
+    "D104", # Missing docstring in public package
+    "D107", # Missing docstring in `__init__`
+    "D401", # First line of docstring should be in imperative mood
+]
+lint.select = [
+    "B",   # flake8-bugbear
+    "D",   # flake8-docstrings
+    "C4",  # flake8-comprehensions
+    "S",   # flake8-bandit
+    "F",   # pyflake
+    "E",   # pycodestyle
+    "W",   # pycodestyle
+    "UP",  # pyupgrade
+    "I",   # isort
+    "RUF", # ruff specific
+]
+exclude = [
+    "bootstrap.py"
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = [
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "S101",
+]
+"setup.py" = ["D100"]
+"conftest.py" = ["D100"]
+"docs/conf.py" = ["D100"]
+
+
+[tool.ruff.lint.isort]
+known-first-party = ["tests"]
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault"
