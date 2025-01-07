@@ -130,3 +130,5 @@ dmypy.json
 
 # File normally ignored that we want to commit
 !project/.idea/
+
+.bootstrap/
