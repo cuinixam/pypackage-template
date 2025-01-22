@@ -8,11 +8,11 @@ Project template for a Python Package using Copier.
 
 ## Features
 
-- Project for Python 3.7+.
+- Project for Python 3.9+.
 - Testing with Pytest using Github actions.
 - Packaging powered by [poetry]
-- Follows the [black] style guide with [flake8] and [isort].
-- Comes with [pre-commit] hook config for black, isort, flake8 and [pyupgrade](https://github.com/asottile/pyupgrade).
+- Uses [Ruff] for formatting and linting.
+- Comes with [pre-commit] hook config for [Ruff].
 - Style guide enforced on CI.
 - Dependencies kept up to date by [Renovate].
 - Follow the [all-contributors] specification.
@@ -67,10 +67,8 @@ When you first push to GitHub, it'll start a `ci` GitHub workflow that you can s
 
 - The `test` job will run your test suite with Pytest against all Python version from 3.10 to 3.11
 - A few things will run in the lint job:
-  - black in check mode
-  - isort in check mode
-  - flake8
-  - pyupgrade for Python 3.10+
+  - Ruff format
+  - Ruff lint with several flake8, isort and pyupgrade plugins.
 
 A `labels` workflow will also run and synchronise the GitHub labels based on the `.github/labels.toml` file.
 
@@ -78,10 +76,10 @@ A `labels` workflow will also run and synchronise the GitHub labels based on the
 
 The workflows need [a few secrets][gh-secrets] to be setup in your GitHub repository:
 
-- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `hacktoberfest` workflow.
-- `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow (optional for public repos).
+- `GH_PAT` a [personal access token (PAT) with the `repo` scope][create-pat] for opening pull requests and updating the repository topics. This is used by the `upgrader` and `labels` workflows.
+- `CODECOV_TOKEN` to upload coverage data to [codecov.io][codecov] in the Test workflow.
 
-If you have the GitHub CLI installed and chose to set up GitHub, they will be created with a dummy value.
+If you have the GitHub CLI installed and chose to set up GitHub, they will be created with a dummy value (`changeme`).
 
 ### Automated release
 
@@ -98,7 +96,7 @@ Here is an overview of its features:
 - Push to GitHub.
 - Create a release in GitHub with the changes as release notes.
 - Build the source and binary distribution (wheel).
-- Upload the sources to PyPI and attach them to the Github release.
+- Upload the sources to PyPI and attach them to the Github release, using trusted publisher.
 
 For more details, check out the [conventional commits website][conventional-commits] and [Python semantic release][python-semantic-release] Github action.
 
@@ -150,9 +148,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 [poetry]: https://python-poetry.org/
-[black]: https://github.com/psf/black
-[flake8]: https://pypi.org/project/flake8/
-[isort]: https://pypi.org/project/isort/
+[Typer]: https://typer.tiangolo.com
+[Rich]: https://rich.readthedocs.io
+[Ruff]: https://pypi.org/project/ruff/
 [pre-commit]: https://pre-commit.com/
 [renovate]: https://docs.renovatebot.com/
 [renovate-gh-app]: https://github.com/apps/renovate

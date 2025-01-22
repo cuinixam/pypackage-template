@@ -10,7 +10,7 @@ from {{ package_name }}.my_app import MyApp
 
 package_name = "{{ package_name }}"
 
-app = typer.Typer(name=package_name, help="{{ project_short_description }}", no_args_is_help=True)
+app = typer.Typer(name=package_name, help="{{ project_short_description }}", no_args_is_help=True, add_completion=False)
 
 
 @app.callback(invoke_without_command=True)
